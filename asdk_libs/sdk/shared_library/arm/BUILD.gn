@@ -1,0 +1,46 @@
+import("//build/ohos.gni")
+
+config("remove_asdk_warnings") {
+  cflags = []
+  if (is_clang) {
+    cflags += [
+      "-Wno-inconsistent-missing-override",
+      "-Wno-thread-safety-analysis",
+      "-Wno-thread-safety-attributes",
+    ]
+  }
+}
+
+config("libcutils_config") {
+  include_dirs = [
+    "include/system/core/libcutils/include",
+    "include/system/core/libprocessgroup/include",
+  ]
+}
+
+ohos_prebuilt_shared_library("libcutils") {
+  source = "libcutils.so"
+  public_configs = [
+    ":remove_asdk_warnings",
+    ":libcutils_config",
+  ]
+  subsystem_name = "a_sdk"
+  part_name = "a_sdk"
+}
+
+config("liblog_config") {
+  include_dirs = [
+    "include/system/core/liblog/include",
+  ]
+}
+
+ohos_prebuilt_shared_library("liblog") {
+  source = "liblog.so"
+  public_configs = [
+    ":remove_asdk_warnings",
+    ":liblog_config",
+  ]
+  subsystem_name = "a_sdk"
+  part_name = "a_sdk"
+}
+
