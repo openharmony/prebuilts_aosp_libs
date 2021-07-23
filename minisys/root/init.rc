@@ -1,9 +1,3 @@
-# Copyright (C) 2012 The Android Open Source Project
-#
-# IMPORTANT: Do not create world writable files or directories.
-# This is a common source of Android security bugs.
-#
-
 import /init.environ.rc
 import /init.usb.rc
 import /init.${ro.hardware}.rc
@@ -15,9 +9,6 @@ import /init.${ro.zygote}.rc
 on early-init
     # Disable sysrq from keyboard
     write /proc/sys/kernel/sysrq 0
-
-    # Set the security context of /adb_keys if present.
-    restorecon /adb_keys
 
     # Set the security context of /postinstall if present.
     restorecon /postinstall
