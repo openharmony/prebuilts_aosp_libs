@@ -12,7 +12,7 @@ on boot
 on property:sys.usb.config=none && property:sys.usb.configfs=0
     stop hdcd
 
-on property:sys.usb.config=hdc && property:sys.usb.configfs=0
+on property:sys.usb.config=hdc,adb && property:sys.usb.configfs=0
     start hdcd
 
 # Used to set USB configuration at boot and to switch the configuration
